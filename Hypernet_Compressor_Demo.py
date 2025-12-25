@@ -180,10 +180,13 @@ print(f"Raw image bits (8-bit RGB): {raw_bits:,}")
 print(f"Hypernetwork params: {H_params} floats -> {H_bits_fp32:,} bits (fp32)")
 print(f"Latents (quantized to 8-bit): {Z_bits_8:,} bits")
 print("Estimated total bits (H fp32 + latents 8-bit):", f"{total_bits_est:,} bits")
-
+# compression ratio ----------------------
+compression_ratio = raw_bits / total_bits_est
+print(f"Compression Ratio (raw / compressed): {compression_ratio:.2f}×")
 # ---------------------- show images ----------------------
 fig, axes = plt.subplots(1, 2, figsize=(6, 3))
 axes[0].imshow(orig_img); axes[0].set_title("Original"); axes[0].axis("off")
 axes[1].imshow(recon); axes[1].set_title(f"Recon PSNR={psnr_val:.2f} dB"); axes[1].axis("off")
 plt.show()
+
 # End of hypernet_compressor_demo.py
